@@ -1,0 +1,3 @@
+C:/Users/oskar/Documents/Weekend-project/build/CMakeFiles/exec_program.dir
+C:/Users/oskar/Documents/Weekend-project/build/CMakeFiles/ALL_BUILD.dir
+C:/Users/oskar/Documents/Weekend-project/build/CMakeFiles/ZERO_CHECK.dir

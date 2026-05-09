@@ -23,3 +23,7 @@ $$
 \text{COV}(W_t^H, W_s^H) = \frac{1}{2}\left( t^{2H} + s^{2H} - |t-s|^{2H} \right)
 $$
 
+
+# Computational considerations
+
+We apply the Cholesky decomposition for fast simulations.

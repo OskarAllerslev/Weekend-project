@@ -1,0 +1,10 @@
+^C:\USERS\OSKAR\DOCUMENTS\WEEKEND-PROJECT\BUILD\CMAKEFILES\681A22AE9A250D05F4077533513F1A2F\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/oskar/Documents/Weekend-project -BC:/Users/oskar/Documents/Weekend-project/build --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/oskar/Documents/Weekend-project/build/Weekend-project.slnx
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd
