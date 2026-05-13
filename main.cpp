@@ -1,5 +1,5 @@
 #include <iostream>
-#include "monte_carlo_pricer.h"
+#include "monte_carlo_pricer.hpp"
 
 int main() 
 {

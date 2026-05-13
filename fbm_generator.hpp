@@ -13,6 +13,7 @@ public:
 
 private:
     void precompute_eigenvalues();
+    double compute_autocovariance(int k) const;
 
     double m_hurst;
     int m_num_steps;

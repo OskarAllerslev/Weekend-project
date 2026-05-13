@@ -1,9 +1,9 @@
 #ifndef MONTE_CARLO_PRICER_H
 #define MONTE_CARLO_PRICER_H
 
-#include "sde_engine.h"
-#include "fbm_generator.h"
-#include "payoff.h"
+#include "sde_engine.hpp"
+#include "fbm_generator.hpp"
+#include "payoff.hpp"
 #include <random>
 
 namespace RoughVolatility {

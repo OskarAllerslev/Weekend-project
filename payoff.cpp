@@ -1,4 +1,4 @@
-#include "payoff.h"
+#include "payoff.hpp"
 #include <iostream>
 
 namespace RoughVolatility {

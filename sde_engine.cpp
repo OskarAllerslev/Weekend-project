@@ -1,4 +1,4 @@
-#include "sde_engine.h"
+#include "sde_engine.hpp"
 #include <iostream>
 
 namespace RoughVolatility {

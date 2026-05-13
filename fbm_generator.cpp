@@ -1,4 +1,4 @@
-#include "fbm_generator.h"
+#include "fbm_generator.hpp"
 #include <iostream>
 
 namespace RoughVolatility {
@@ -19,6 +19,13 @@ void FbmGenerator::precompute_eigenvalues() {
 std::vector<double> FbmGenerator::generate_path(std::mt19937& rng) {
     std::cout << "Warning: FbmGenerator::generate_path() not implemented." << std::endl;
     return std::vector<double>(m_num_steps + 1, 0.0);
+}
+
+double compute_autocovariance(int k)
+{
+    // tmp
+
+    return 0.0;
 }
 
 } // namespace RoughVolatility
