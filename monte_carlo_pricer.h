@@ -4,6 +4,7 @@
 #include "sde_engine.h"
 #include "fbm_generator.h"
 #include "payoff.h"
+#include <random>
 
 namespace RoughVolatility {
 
@@ -32,6 +33,7 @@ private:
     FbmGenerator m_fbm_generator;
     SdeEngine m_sde_engine;
     EuropeanCallPayoff m_payoff;
+    std::mt19937 m_rng;
 };
 
 } // namespace RoughVolatility

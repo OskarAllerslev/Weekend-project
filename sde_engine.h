@@ -2,13 +2,14 @@
 #define SDE_ENGINE_H
 
 #include <vector>
+#include <random>
 
 namespace RoughVolatility {
 
 class SdeEngine {
 public:
     SdeEngine(double kappa, double theta, double v0, double nu, double x0, double hurst, double T, int num_steps);
-    double simulate_path(const std::vector<double>& fbm_path);
+    double simulate_path(const std::vector<double>& fbm_path, std::mt19937& rng);
 
 private:
     double m_kappa;

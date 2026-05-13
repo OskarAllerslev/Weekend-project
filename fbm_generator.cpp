@@ -16,7 +16,7 @@ void FbmGenerator::precompute_eigenvalues() {
     m_eigenvalues.assign(2 * m_num_steps, 1.0);
 }
 
-std::vector<double> FbmGenerator::generate_path() {
+std::vector<double> FbmGenerator::generate_path(std::mt19937& rng) {
     std::cout << "Warning: FbmGenerator::generate_path() not implemented." << std::endl;
     return std::vector<double>(m_num_steps + 1, 0.0);
 }

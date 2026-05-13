@@ -2,13 +2,14 @@
 #define FBM_GENERATOR_H
 
 #include <vector>
+#include <random>
 
 namespace RoughVolatility {
 
 class FbmGenerator {
 public:
     FbmGenerator(double hurst, int num_steps, double T);
-    std::vector<double> generate_path();
+    std::vector<double> generate_path(std::mt19937& rng);
 
 private:
     void precompute_eigenvalues();
