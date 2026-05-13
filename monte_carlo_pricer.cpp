@@ -11,7 +11,7 @@ MonteCarloPricer::MonteCarloPricer(
     m_num_steps(num_steps),
     m_T(T),
     m_fbm_generator(hurst, num_steps, T),
-    m_sde_engine(kappa, theta, v0, nu, x0, hurst),
+    m_sde_engine(kappa, theta, v0, nu, x0, hurst, T, num_steps),
     m_payoff(strike)
 {}
 
@@ -21,7 +21,7 @@ double MonteCarloPricer::run() {
 
     for (int i = 0; i < m_num_sims; ++i) {
         std::vector<double> fbm_path = m_fbm_generator.generate_path();
-        double final_price = m_sde_engine.simulate_path(fbm_path, m_T, m_num_steps);
+        double final_price = m_sde_engine.simulate_path(fbm_path);
         total_payoff += m_payoff(final_price);
     }
     
