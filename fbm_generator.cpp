@@ -4,7 +4,8 @@
 namespace RoughVolatility {
 
 FbmGenerator::FbmGenerator(double hurst, int num_steps, double T)
-    : m_hurst(hurst), m_num_steps(num_steps), m_T(T) {
+    : m_hurst(hurst), m_num_steps(num_steps), m_T(T) 
+{
     std::cout << "FbmGenerator: Pre-computing eigenvalues..." << std::endl;
     precompute_eigenvalues();
     std::cout << "FbmGenerator: ...Done." << std::endl;
