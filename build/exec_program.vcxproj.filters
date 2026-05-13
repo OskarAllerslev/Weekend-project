@@ -4,6 +4,18 @@
     <ClCompile Include="C:\Users\oskar\Documents\Weekend-project\main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="C:\Users\oskar\Documents\Weekend-project\fbm_generator.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\oskar\Documents\Weekend-project\sde_engine.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\oskar\Documents\Weekend-project\payoff.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="C:\Users\oskar\Documents\Weekend-project\monte_carlo_pricer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="C:\Users\oskar\Documents\Weekend-project\CMakeLists.txt" />

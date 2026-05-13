@@ -1,1 +1,5 @@
 C:\Users\oskar\Documents\Weekend-project\main.cpp;C:\Users\oskar\Documents\Weekend-project\build\exec_program.dir\Debug\main.obj
+C:\Users\oskar\Documents\Weekend-project\fbm_generator.cpp;C:\Users\oskar\Documents\Weekend-project\build\exec_program.dir\Debug\fbm_generator.obj
+C:\Users\oskar\Documents\Weekend-project\sde_engine.cpp;C:\Users\oskar\Documents\Weekend-project\build\exec_program.dir\Debug\sde_engine.obj
+C:\Users\oskar\Documents\Weekend-project\payoff.cpp;C:\Users\oskar\Documents\Weekend-project\build\exec_program.dir\Debug\payoff.obj
+C:\Users\oskar\Documents\Weekend-project\monte_carlo_pricer.cpp;C:\Users\oskar\Documents\Weekend-project\build\exec_program.dir\Debug\monte_carlo_pricer.obj
