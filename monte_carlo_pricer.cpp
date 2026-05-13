@@ -11,7 +11,7 @@ MonteCarloPricer::MonteCarloPricer(
     m_num_steps(num_steps),
     m_T(T),
     m_fbm_generator(hurst, num_steps, T),
-    m_sde_engine(kappa, theta, v0, nu, x0),
+    m_sde_engine(kappa, theta, v0, nu, x0, hurst),
     m_payoff(strike)
 {}
 

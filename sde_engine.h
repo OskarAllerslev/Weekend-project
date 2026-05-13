@@ -7,7 +7,7 @@ namespace RoughVolatility {
 
 class SdeEngine {
 public:
-    SdeEngine(double kappa, double theta, double v0, double nu, double x0);
+    SdeEngine(double kappa, double theta, double v0, double nu, double x0, double hurst);
     double simulate_path(const std::vector<double>& fbm_path, double T, int num_steps);
 
 private:
@@ -16,6 +16,7 @@ private:
     double m_v0;
     double m_nu;
     double m_x0;
+    double m_hurst;
 };
 
 } // namespace RoughVolatility
