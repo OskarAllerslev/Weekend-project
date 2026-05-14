@@ -1,6 +1,7 @@
 #ifndef FBM_GENERATOR_H
 #define FBM_GENERATOR_H
 
+#include <cmath>
 #include <vector>
 #include <random>
 
@@ -18,6 +19,8 @@ private:
     double m_hurst;
     int m_num_steps;
     double m_T;
+    double m_dt = m_T / (double) m_num_steps;
+    double m_dt_squared = std::powf(m_dt, 2*m_hurst);
     std::vector<double> m_eigenvalues;
 };
 

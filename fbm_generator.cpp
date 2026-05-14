@@ -1,5 +1,7 @@
 #include "fbm_generator.hpp"
+#include <cstdlib>
 #include <iostream>
+#include <pplwin.h>
 
 namespace RoughVolatility {
 
@@ -21,11 +23,21 @@ std::vector<double> FbmGenerator::generate_path(std::mt19937& rng) {
     return std::vector<double>(m_num_steps + 1, 0.0);
 }
 
-double compute_autocovariance(int k)
+double FbmGenerator::compute_autocovariance(int k) const
 {
-    // tmp
+    /*
+    \gamma(k) = 1/2 \deltat^{2h} \left( |k+1|^2H - 2|k|^2H + |k-1|^2H \right)
+    */
+    if (k==0)
+    {
+        return m_dt_squared;
+    }
 
-    return 0.0;
+    double first_part = std::pow(std::abs( k+1.0), 2.0 * m_hurst);
+    double second_part = std::pow(std::abs( (double)k), 2.0 * m_hurst);
+    double third_part = std::pow(std::abs( k-1.0), 2.0 * m_hurst);
+
+    return 0.5 * m_dt_squared * ( first_part - 2*second_part + third_part);
 }
 
 } // namespace RoughVolatility
