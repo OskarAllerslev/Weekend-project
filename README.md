@@ -30,14 +30,14 @@ $$\text{COV}(W_t^H, W_s^H) = \frac{1}{2}\left(t^{2H} + s^{2H} - |t-s|^{2H}\right
 
 ## Computational Strategy
 
-### 1. Simulating Fractional Brownian Motion (The Davies-Harte Method)
+### 1. Simulating Fractional Brownian Motion (The Davies-Harte Method) 
 Because the covariance matrix of fBm implies $O(N^3)$ complexity using Cholesky decomposition, we simulate the *increments* of the fBm (fractional Gaussian noise, fGn) instead. fGn is a stationary Gaussian process.
 
 The autocovariance function of fGn over a time step $\Delta t$ is:
 
 $$\gamma(k) = \frac{1}{2} \Delta t^{2H} \left(|k+1|^{2H} - 2|k|^{2H} + |k-1|^{2H}\right)$$
 
-**The Davies-Harte Algorithm:**
+**The Davies-Harte Algorithm:[fbm_generator.(cpp/hpp) ]**
 1. Compute the autocovariance sequence $\gamma(k)$ for $k = 0, 1, \dots, N$.
 2. Embed this sequence into a symmetric circulant matrix of size $2N$.
 3. Compute the eigenvalues of this circulant matrix using the Discrete Fourier Transform (FFT).
