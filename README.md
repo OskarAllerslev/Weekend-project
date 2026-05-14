@@ -119,4 +119,4 @@ To understand the theoretical foundation of the exact simulation methods and rou
 # Findings and results
 
 Here is a simulated fbm path with $H = 0.01$. 
-<img src="assets/fbm_plot.png" alt="Rough Volatility Path Simulation" width="600"/>
+![Rough Volatility path simulation](assets/fbm_sim.png)
