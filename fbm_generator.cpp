@@ -1,9 +1,12 @@
 #include "fbm_generator.hpp"
 #include <cmath>
+#include <complex>
 #include <cstdlib>
 #include <iostream>
 #include <pplwin.h>
+#include <random>
 #include <stdexcept>
+#include <vector>
 
 namespace RoughVolatility {
 
@@ -51,9 +54,68 @@ void FbmGenerator::precompute_eigenvalues()
 
 }
 
-std::vector<double> FbmGenerator::generate_path(std::mt19937 &rng) {
-  std::cout << "Warning: FbmGenerator::generate_path() not implemented."
-            << std::endl;
+std::vector<double> FbmGenerator::generate_path(std::mt19937 &rng) 
+{
+    int N = m_num_steps;
+    int M = 2 * N;
+
+    // generator complex standard normal rv. M 
+
+    // first random variables
+    std::normal_distribution<double> dist(0.0, 1.0);
+    std::vector<double> Z(M, 0.0);
+
+    for (int i = 0; i <= M - 1; i++)
+    {
+        Z[i] = dist(rng);
+    }
+
+    // generate the complex variables
+
+    std::vector<std::complex<double>> V(M, 0.0);
+
+    V[0] = std::complex<double>(Z[0], 0);
+    V[N] = std::complex<double>(Z[N], 0);
+    for (int i = 1; i < N; i++) {
+      double sqrt_2 = std::sqrt(2.0);
+      V[i] = std::complex<double>(Z[i], Z[M-i]) / sqrt_2;
+      V[M-i] = std::complex<double>(Z[i], -Z[M-i]) / sqrt_2;
+    }
+
+
+    // scaling and inverse discrete fourier transform
+    const double pi = std::acos(-1.0);
+    std::vector<double> fgn_increments(N, 0.0);
+
+    for (int j = 0; j <= N-1; j++)
+    {
+        double sum_real = 0.0;
+        for (int k = 0; k <= M -1; k++)
+        {
+            /*
+            sqrt{g_k * V} * exp{2 \pi j k/M}
+            */
+            std::complex<double> U_k = std::sqrt(m_eigenvalues[k] * V[k]);
+            double theta = (2.0 * pi * j * k )/M;
+            std::complex<double> exp_ik = std::complex<double> (std::cos(theta), std::sin(theta));
+
+            std::complex<double> product = U_k * exp_ik;
+
+            // we only need the real part - see test_for_hurst_effect.pdf
+            sum_real += product.real();
+        }
+        fgn_increments[j] = sum_real / M;
+    }
+    // cumulative sum to build the path
+    
+    std::vector<double> path(N + 1, 0.0);
+    path[0] = 0.0; // according to the definition of a levy process and also fbm
+    for (int i =0; i <= N-1; i++)
+    {
+        path[1+i] = path[i] + fgn_increments[i];
+    }
+    return path;
+
   return std::vector<double>(m_num_steps + 1, 0.0);
 }
 

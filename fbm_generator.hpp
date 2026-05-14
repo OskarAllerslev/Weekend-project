@@ -4,6 +4,7 @@
 #include <cmath>
 #include <vector>
 #include <random>
+#include <complex>
 
 namespace RoughVolatility {
 

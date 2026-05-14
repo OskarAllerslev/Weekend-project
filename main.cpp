@@ -1,5 +1,7 @@
 #include <exception>
 #include <iostream>
+#include <ostream>
+#include <random>
 #include "fbm_generator.hpp"
 #include "monte_carlo_pricer.hpp"
 
@@ -20,7 +22,25 @@ int main()
 
         RoughVolatility::FbmGenerator fbm_gen(H, num_steps, T);
 
-        std::cout << "Succes" << std::endl;
+
+        std::random_device rd;
+        std::mt19937 rng(rd());
+        std::vector<double> path = fbm_gen.generate_path(rng);
+
+        std::cout << "Suceces: path generated with " << path.size() << " points." << std::endl;
+        std::cout << "The first five steps are: " << std::endl;
+
+        for (int i = 0; i < 6; i++)
+        {
+            std::cout << "W^H(" << i << ") = " << path[i] << std::endl;
+        }
+        std::cout << " \n" << std::endl;
+
+        std::cout << "Terminal value: " << path.back() << std::endl;
+
+
+
+
     }
     catch (const std::exception& e)
     {
