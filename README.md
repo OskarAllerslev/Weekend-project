@@ -109,3 +109,14 @@ To understand the theoretical foundation of the exact simulation methods and rou
 2. **Rough Volatility Framework:**
    * Gatheral, J., Jaisson, T., & Rosenbaum, M. (2018). *Volatility is rough*. Quantitative Finance, 18(6), 933-949.
    * Bayer, C., Friz, P., & Gatheral, J. (2016). *Pricing under rough volatility*. Quantitative Finance, 16(6), 887-904.
+
+
+
+
+
+-----------------------------------------
+
+# Findings and results
+
+Here is a simulated fbm path with $H = 0.01$. 
+<img src="assets/fbm_plot.png" alt="Rough Volatility Path Simulation" width="600"/>
