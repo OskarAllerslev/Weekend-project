@@ -15,12 +15,13 @@ public:
 private:
     void precompute_eigenvalues();
     double compute_autocovariance(int k) const;
+    double single_direct_fourier_transform(int k, const std::vector<double>& c) const;
 
     double m_hurst;
     int m_num_steps;
     double m_T;
-    double m_dt = m_T / (double) m_num_steps;
-    double m_dt_squared = std::powf(m_dt, 2*m_hurst);
+    double m_dt;
+    double m_dt_2H;
     std::vector<double> m_eigenvalues;
 };
 
