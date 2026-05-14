@@ -93,9 +93,9 @@ std::vector<double> FbmGenerator::generate_path(std::mt19937 &rng)
         for (int k = 0; k <= M -1; k++)
         {
             /*
-            sqrt{g_k * V} * exp{2 \pi j k/M}
+            sqrt{g_k } * V* exp{2 \pi j k/M}
             */
-            std::complex<double> U_k = std::sqrt(m_eigenvalues[k] * V[k]);
+            std::complex<double> U_k = std::sqrt(m_eigenvalues[k] )* V[k];
             double theta = (2.0 * pi * j * k )/M;
             std::complex<double> exp_ik = std::complex<double> (std::cos(theta), std::sin(theta));
 
@@ -104,7 +104,7 @@ std::vector<double> FbmGenerator::generate_path(std::mt19937 &rng)
             // we only need the real part - see test_for_hurst_effect.pdf
             sum_real += product.real();
         }
-        fgn_increments[j] = sum_real / M;
+        fgn_increments[j] = sum_real / std::sqrt(M);
     }
     // cumulative sum to build the path
     
@@ -116,7 +116,6 @@ std::vector<double> FbmGenerator::generate_path(std::mt19937 &rng)
     }
     return path;
 
-  return std::vector<double>(m_num_steps + 1, 0.0);
 }
 
 double FbmGenerator::compute_autocovariance(int k) const {

@@ -2,8 +2,20 @@
 #include <iostream>
 #include <ostream>
 #include <random>
+#include <fstream>
 #include "fbm_generator.hpp"
 #include "monte_carlo_pricer.hpp"
+
+void save_to_csv(const std::vector<double>& path, const std::string& filename) {
+    std::ofstream file(filename);
+    file << "step,value\n"; 
+    for (size_t i = 0; i < path.size(); ++i) {
+        file << i << "," << path[i] << "\n";
+    }
+    file.close();
+    std::cout << "Sti gemt i " << filename << std::endl;
+}
+
 
 int main() 
 {
@@ -11,9 +23,9 @@ int main()
     std::cout << "Testing the fbm generator part" << std::endl;
 
 
-    double H = 0.1;
-    double num_steps = 1000; // N
-    double T = 1.0; // eks one year
+    double H = 0.01;
+    double num_steps = 10000; // N
+    double T = 2.0; // eks one year
 
 
     try 
@@ -26,6 +38,8 @@ int main()
         std::random_device rd;
         std::mt19937 rng(rd());
         std::vector<double> path = fbm_gen.generate_path(rng);
+        
+        save_to_csv(path, "fbm_path");
 
         std::cout << "Suceces: path generated with " << path.size() << " points." << std::endl;
         std::cout << "The first five steps are: " << std::endl;
@@ -51,3 +65,5 @@ int main()
     return 0;
 
 }
+
+
