@@ -36,4 +36,20 @@ double MonteCarloPricer::run() {
     return sum_payoff / m_num_sims; // expectation of the samples 
 }
 
+std::vector<double> MonteCarloPricer::run_get_paths() 
+{
+    std::vector<double> terminal_prices(m_num_sims, 0.0);
+    #pragma omp parallel for 
+    for (int i = 0; i < m_num_sims; i++)
+    {
+        std::mt19937 local_rng(42 + i);
+
+        std::vector<double> fbm_path = m_fbm_generator.generate_path(local_rng);
+        double X_T = m_sde_engine.simulate_path(fbm_path,local_rng);
+
+        terminal_prices[i] = X_T;
+    }
+    return terminal_prices;
+}
+
 } // namespace RoughVolatility

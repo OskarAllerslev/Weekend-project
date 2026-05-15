@@ -2,7 +2,7 @@
 
 
 fbm_data <- readr::read_csv(
-  file = "fbm_path"
+  file = "data/fbm_path"
 )  |> 
   dplyr::as_tibble()
 

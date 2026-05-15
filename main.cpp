@@ -6,15 +6,14 @@
 #include "fbm_generator.hpp"
 #include <chrono>
 #include "monte_carlo_pricer.hpp"
-
-void save_to_csv(const std::vector<double>& path, const std::string& filename) {
+void save_prices_to_csv(const std::vector<double>& prices, const std::string& filename) {
     std::ofstream file(filename);
-    file << "step,value\n"; 
-    for (size_t i = 0; i < path.size(); ++i) {
-        file << i << "," << path[i] << "\n";
+    file << "X\n"; 
+    for (double p : prices) {
+        file << p << "\n";
     }
     file.close();
-    std::cout << "Sti gemt i " << filename << std::endl;
+    std::cout << "Gemte " << prices.size() << " simuleringer til " << filename << std::endl;
 }
 
 
@@ -35,7 +34,7 @@ int main()
 
     double v0 = 0.04;
     double nu = 1.5;
-    double strike = 55.0;
+    double strike = 55;
 
 
     try 
@@ -48,11 +47,15 @@ int main()
 
         std::cout << "Calculating expected payoff over: " << num_sims << "paths." << std::endl;
 
-        double price = pricer.run();
+        // double price = pricer.run();
+        auto all_XT = pricer.run_get_paths();
+        save_prices_to_csv(all_XT, "sim_prices.csv");
+
         auto end_time = std::chrono::high_resolution_clock::now();
         std::chrono::duration<double> elapsed = end_time - start_time;
 
-        std::cout << "Expected call option price: " << price << std::endl;
+
+        // std::cout << "Expected call option price: " << price << std::endl;
         std::cout << "Elapsed time: " << elapsed.count() << std::endl;
         
 

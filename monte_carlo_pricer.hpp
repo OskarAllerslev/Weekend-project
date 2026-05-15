@@ -5,6 +5,7 @@
 #include "fbm_generator.hpp"
 #include "payoff.hpp"
 #include <random>
+#include <vector>
 
 namespace RoughVolatility {
 
@@ -24,6 +25,8 @@ public:
     );
 
     double run();
+    std::vector<double> run_get_paths();
+
 
 private:
     int m_num_sims;
