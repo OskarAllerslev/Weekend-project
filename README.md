@@ -28,23 +28,23 @@ The codebase is designed with modern C++ principles (RAII, Functors, strict memo
 
 The underlying asset follows these dynamics:
 
-dX_t = \kappa(\theta - X_t) dt + \sqrt{V_t} X_t dW_t^{(1)}
+$$dX_t = \kappa(\theta - X_t) dt + \sqrt{V_t} X_t dW_t^{(1)}$$
 
 Where:
-* \kappa: Mean reversion speed.
-* \theta: Long-term mean level.
-* W_t^{(1)}: Standard Wiener process.
+* $\kappa$: Mean reversion speed.
+* $\theta$: Long-term mean level.
+* $W_t^{(1)}$: Standard Wiener process.
 
 Variance is defined explicitly to capture market roughness:
 
-V_t = V_0 \exp\left(\nu W_t^H - \frac{1}{2} \nu^2 t^{2H}\right), \quad H \in (0, 0.5)
+$$V_t = V_0 \exp\left(\nu W_t^H - \frac{1}{2} \nu^2 t^{2H}\right), \quad H \in (0, 0.5)$$
 
-Where W_t^H is a fractional Brownian motion (fBm) with covariance:
-COV(W_t^H, W_s^H) = \frac{1}{2}\left(t^{2H} + s^{2H} - |t-s|^{2H}\right)
+Where $W_t^H$ is a fractional Brownian motion (fBm) with covariance:
+$$COV(W_t^H, W_s^H) = \frac{1}{2}\left(t^{2H} + s^{2H} - |t-s|^{2H}\right)$$
 
 ### The Davies-Harte Algorithm
-To achieve O(N log N) complexity, we simulate the increments (fractional Gaussian noise, fGn) using circulant embedding:
-1. Compute the autocovariance \gamma(k) and embed it into a symmetric circulant matrix of size 2N.
+To achieve $O(N \log N)$ complexity, we simulate the increments (fractional Gaussian noise, fGn) using circulant embedding:
+1. Compute the autocovariance $\gamma(k)$ and embed it into a symmetric circulant matrix of size $2N$.
 2. Compute eigenvalues via FFT.
 3. Generate complex standard normal variables, scale by the eigenvalues, and apply IFFT to extract exact fGn increments.
 
@@ -73,14 +73,18 @@ cmake --build build --config Release
 The engine's output is validated using a production-grade R pipeline to ensure financial consistency.
 
 ### 1. Terminal Distribution
-With H = 0.1, the terminal price distribution exhibits the characteristic "fat tails" of rough markets, concentrated around the mean-reversion level \theta = 50.
+With $H = 0.1$, the terminal price distribution exhibits the characteristic "fat tails" of rough markets, concentrated around the mean-reversion level $\theta = 50$.
 
-![Terminal Distribution](assets/terminal_distribution.png)
+<p align="center">
+  <img src="assets/terminal_distribution.png" width="600" alt="Terminal Distribution">
+</p>
 
 ### 2. The Volatility Surface (Implied Volatility Smile)
-The model's primary strength is its ability to reproduce the "volatility smile". By inverting the Black-Scholes formula using a Newton-Raphson solver, we observe a pronounced skew explosion at short maturities (T=0.1), which is a hallmark of Rough Volatility models.
+The model's primary strength is its ability to reproduce the "volatility smile". By inverting the Black-Scholes formula using a Newton-Raphson solver, we observe a pronounced skew explosion at short maturities ($T=0.1$), which is a hallmark of Rough Volatility models.
 
-![Volatility Smile](assets/volatility_smile.png)
+<p align="center">
+  <img src="assets/volatility_smile.png" width="600" alt="Volatility Smile">
+</p>
 
 ### 3. Numerical Stability
 | Metric | Value |
