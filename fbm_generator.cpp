@@ -23,6 +23,14 @@ FbmGenerator::FbmGenerator(double hurst, int num_steps, double T)
 
 void FbmGenerator::precompute_eigenvalues() 
 {
+    /*
+    here we do the entire
+    g_k calculation, 
+    see the test_for_hurst_effect.pdf p. 101
+
+    first we calculate the autocovariances
+    then we do the SDFT 
+    */
     int N = m_num_steps;
 
     std::vector<double> c(2*N, 0.0);

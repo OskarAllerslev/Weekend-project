@@ -39,18 +39,18 @@ int main()
         std::mt19937 rng(rd());
         std::vector<double> path = fbm_gen.generate_path(rng);
         
-        save_to_csv(path, "fbm_path");
+        // save_to_csv(path, "fbm_path");
 
-        std::cout << "Suceces: path generated with " << path.size() << " points." << std::endl;
-        std::cout << "The first five steps are: " << std::endl;
+        // std::cout << "Suceces: path generated with " << path.size() << " points." << std::endl;
+        // std::cout << "The first five steps are: " << std::endl;
 
-        for (int i = 0; i < 6; i++)
-        {
-            std::cout << "W^H(" << i << ") = " << path[i] << std::endl;
-        }
-        std::cout << " \n" << std::endl;
+        // for (int i = 0; i < 6; i++)
+        // {
+        //     std::cout << "W^H(" << i << ") = " << path[i] << std::endl;
+        // }
+        // std::cout << " \n" << std::endl;
 
-        std::cout << "Terminal value: " << path.back() << std::endl;
+        // std::cout << "Terminal value: " << path.back() << std::endl;
 
 
 
