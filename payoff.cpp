@@ -1,13 +1,13 @@
 #include "payoff.hpp"
-#include <iostream>
+#include <algorithm>
 
 namespace RoughVolatility {
 
 EuropeanCallPayoff::EuropeanCallPayoff(double strike) : m_strike(strike) {}
 
 double EuropeanCallPayoff::operator()(double spot) const {
-    std::cout << "Warning: Payoff calculation not implemented." << std::endl;
-    return 0.0;
+    auto res = std::max(spot - m_strike, 0.0);
+    return res;
 }
 
 } // namespace RoughVolatility

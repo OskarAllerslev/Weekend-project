@@ -33,7 +33,6 @@ private:
     FbmGenerator m_fbm_generator;
     SdeEngine m_sde_engine;
     EuropeanCallPayoff m_payoff;
-    std::mt19937 m_rng;
 };
 
 } // namespace RoughVolatility

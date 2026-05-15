@@ -5,6 +5,8 @@ project(Weekend-project)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+find_package(OpenMP REQUIRED)
+
 # include_directories(eigen)
 
 add_executable(exec_program 
@@ -14,3 +16,5 @@ add_executable(exec_program
     payoff.cpp
     monte_carlo_pricer.cpp
 )
+
+target_link_libraries(exec_program PRIVATE OpenMP::OpenMP_CXX)

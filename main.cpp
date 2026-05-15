@@ -4,6 +4,7 @@
 #include <random>
 #include <fstream>
 #include "fbm_generator.hpp"
+#include <chrono>
 #include "monte_carlo_pricer.hpp"
 
 void save_to_csv(const std::vector<double>& path, const std::string& filename) {
@@ -23,37 +24,37 @@ int main()
     std::cout << "Testing the fbm generator part" << std::endl;
 
 
-    double H = 0.01;
-    double num_steps = 10000; // N
-    double T = 2.0; // eks one year
+    int num_sims = 10000;
+    int num_steps = 365;
+    double T = 1.0;
+    double hurst = 0.1;
+
+    double kappa = 5.0;
+    double theta = 50.0;
+    double x0 = 50.0;
+
+    double v0 = 0.04;
+    double nu = 1.5;
+    double strike = 55.0;
 
 
     try 
     {
-        std::cout << "Initializing the FbmGenerator (H=" << H << ", N=" << num_steps << ", T=" << T << std::endl;
+        auto start_time = std::chrono::high_resolution_clock::now();
+        std::cout << "Initializing pricer" << std::endl;
 
-        RoughVolatility::FbmGenerator fbm_gen(H, num_steps, T);
+        RoughVolatility::MonteCarloPricer pricer(
+            num_sims, num_steps, T, hurst, kappa, theta, v0, nu, x0, strike);
 
+        std::cout << "Calculating expected payoff over: " << num_sims << "paths." << std::endl;
 
-        std::random_device rd;
-        std::mt19937 rng(rd());
-        std::vector<double> path = fbm_gen.generate_path(rng);
+        double price = pricer.run();
+        auto end_time = std::chrono::high_resolution_clock::now();
+        std::chrono::duration<double> elapsed = end_time - start_time;
+
+        std::cout << "Expected call option price: " << price << std::endl;
+        std::cout << "Elapsed time: " << elapsed.count() << std::endl;
         
-        // save_to_csv(path, "fbm_path");
-
-        // std::cout << "Suceces: path generated with " << path.size() << " points." << std::endl;
-        // std::cout << "The first five steps are: " << std::endl;
-
-        // for (int i = 0; i < 6; i++)
-        // {
-        //     std::cout << "W^H(" << i << ") = " << path[i] << std::endl;
-        // }
-        // std::cout << " \n" << std::endl;
-
-        // std::cout << "Terminal value: " << path.back() << std::endl;
-
-
-
 
     }
     catch (const std::exception& e)
